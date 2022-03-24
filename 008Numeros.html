@@ -1,0 +1,786 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Unos apuntes sobre bits, sistema binario, compiladores y otras cosas">
+      
+      
+      
+        <link rel="canonical" href="https://trezebits.github.io/unmundobinario/008Numeros.html">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.5">
+    
+    
+      
+        <title>Números - Un mundo binario</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.2d9f7617.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="css/estilos.css">
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#numeros" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="." title="Un mundo binario" class="md-header__button md-logo" aria-label="Un mundo binario" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Un mundo binario
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Números
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/trezebits/unmundobinario/" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    trezebits/unmundobinario
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link md-tabs__link--active">
+        Indice
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="https://trezebits.github.io" class="md-tabs__link">
+      treZe bits
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Un mundo binario" class="md-nav__button md-logo" aria-label="Un mundo binario" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Un mundo binario
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/trezebits/unmundobinario/" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    trezebits/unmundobinario
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Indice
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Indice" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Indice
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Introducción
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="001Digitos.html" class="md-nav__link">
+        Dígitos binarios
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="002Binario.html" class="md-nav__link">
+        Sistema binario
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="003Aritmetica.html" class="md-nav__link">
+        Aritmética binaria
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="004Bits.html" class="md-nav__link">
+        Bits y Bytes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="005Octal.html" class="md-nav__link">
+        Sistema octal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="006Hexadecimal.html" class="md-nav__link">
+        Sistema hexadecimal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="007Datos.html" class="md-nav__link">
+        Representar datos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Números
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="008Numeros.html" class="md-nav__link md-nav__link--active">
+        Números
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#datos-numericos" class="md-nav__link">
+    Datos numéricos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#numeros-negativos" class="md-nav__link">
+    Números negativos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#numeros-sin-signo" class="md-nav__link">
+    Números sin signo
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="009Decimales.html" class="md-nav__link">
+        Números con decimales
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="010Textos.html" class="md-nav__link">
+        Textos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="011Imagenes.html" class="md-nav__link">
+        Imágenes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="012Archivos.html" class="md-nav__link">
+        Archivos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="013Programas.html" class="md-nav__link">
+        Programas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="014Lenguajes.html" class="md-nav__link">
+        Lenguajes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://trezebits.github.io" class="md-nav__link">
+        treZe bits
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#datos-numericos" class="md-nav__link">
+    Datos numéricos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#numeros-negativos" class="md-nav__link">
+    Números negativos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#numeros-sin-signo" class="md-nav__link">
+    Números sin signo
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="numeros">Números<a class="headerlink" href="#numeros" title="Permanent link">&para;</a></h1>
+<h2 id="datos-numericos">Datos numéricos<a class="headerlink" href="#datos-numericos" title="Permanent link">&para;</a></h2>
+<p>Supongamos que tenemos una base de datos con edades de un grupo de personas. Imaginemos una persona que tiene 35 años. Para saber como se representa este dato en forma de ceros y unos, basta con trasladar de sistema decimal a binario: <code>100011</code>.</p>
+<p>La representación exacta depende del número de bits que ocupe el dato en la memoria del ordenador. Debemos rellenar el espacio con ceros por la izquierda. Para representar el valor 35, tenemos:</p>
+<ul>
+<li>Dato de 8 bits: <code>00100011</code></li>
+<li>Dato de 16 bits: <code>00000000 00100011</code></li>
+<li>Dato de 32 bits: <code>00000000 00000000 00000000 00100011</code></li>
+<li>Dato de 64 bits: <code>00000000 00000000 00000000 00000000 00000000 00000000 00000000 00100011</code></li>
+</ul>
+<h2 id="numeros-negativos">Números negativos<a class="headerlink" href="#numeros-negativos" title="Permanent link">&para;</a></h2>
+<p>En el sistema numérico binario no existen los números negativos. Para representarlos necesitamos de algún truco. Cada fabricante de chips tiene su diseño, pero lo más frecuente es que en cada dato se reserve un bit para indicar el signo.</p>
+<p>Supongamos, por ejemplo, un dato que ocupa 32 bits, es decir, cuatro bytes. Dependiendo del diseño de la CPU, el primer dígito suele ser un 0 para valores positivos y un 1 para los negativos.
+De esta forma tendríamos:</p>
+<div class="highlight"><pre><span></span><code>cero:                     00000000 00000000 00000000 00000000
+uno:                      00000000 00000000 00000000 00000001
+valor máximo con 32 bits: 01111111 11111111 11111111 11111111
+</code></pre></div>
+<p>Convirtiendo de binario a decimal, el valor máximo de 32 bits será por lo tanto 2.147.483.647, considerando que el primer bit ha de ser un cero, por ser un valor positivo.</p>
+<p>Se podría pensar que para representar cualquier número negativo basta con cambiar el primer bit, pero en realidad no suele ser así. Consideremos el número:</p>
+<div class="codehilite"><pre><span></span><code><span class="mf">10000000</span><span class="w"> </span><span class="mf">00000000</span><span class="w"> </span><span class="mf">00000000</span><span class="w"> </span><span class="mf">00000000</span><span class="w"></span>
+</code></pre></div>
+
+<p>¿Que es esto? ¿Menos cero? Esto no funciona. Necesitamos otra forma de representar los valores negativos.</p>
+<p>El diseño interno de los chips de un ordenador suele depender del fabricante, pero lo más frecuente es que funcionen como el cuentakilómetros de un coche. Al llegar a <code>999999</code>, pasa a mostrar <code>000000</code>. Si pudiésemos ir marcha atrás, al llegar a <code>000000</code> mostraría <code>999999</code>.</p>
+<p>En un ordenador, si a una variable de 32 bits con valor cero le restamos uno, obtenemos:</p>
+<div class="highlight"><pre><span></span><code>cero:      00000000 00000000 00000000 00000000
+menos uno: 11111111 11111111 11111111 11111111
+</code></pre></div>
+<p>y si seguimos restando, obtendríamos el mínimo valor posible, con todos los bits a cero, y el bit de signo a 1, por ser un valor negativo:</p>
+<div class="highlight"><pre><span></span><code>-2.147.483.648 = 10000000 00000000 00000000 00000000
+</code></pre></div>
+<p>Por lo tanto, para una variable de 32 bits tenemos:</p>
+<div class="highlight"><pre><span></span><code>valor máximo:  2.147.483.647 = 01111111 11111111 11111111 11111111
+uno:                         = 00000000 00000000 00000000 00000001
+cero:                        = 00000000 00000000 00000000 00000000
+menos uno:                   = 11111111 11111111 11111111 11111111
+valor mínimo: -2.147.483.648 = 10000000 00000000 00000000 00000000 
+</code></pre></div>
+<p>Un detalle curioso. Si una variable de 32 bits puede representar datos dentro de un rango que va desde -2.147.483.648 hasta 2.147.483.647 ¿a que se debe esa asimetría? No existe el cero negativo, lo que deja espacio para un valor negativo extra.</p>
+<p>En la práctica, los valores positivos son fáciles de interpretar. Basta con convertir de binario a decimal. Pero para interpretar un valor negativo, necesitamos una regla de cálculo. Entre los fabricantes de chips, el diseño más frecuente consiste en un sistema conocido como <em>complemento a dos</em>, que funciona de la siguiente forma:</p>
+<ul>
+<li>
+<p>Imaginemos una variable que ocupa ocho bits y su valor en binario es <code>0111 0011</code>. Vemos que el primer bit es 0, por lo que se trata de un número positivo. Basta con convertir de binario a decimal. Sumamos los pesos correspondientes a los unos, y obtenemos el valor de la variable: 64+32+16+2+1 = 115</p>
+</li>
+<li>
+<p>Ahora bien, supongamos que cambiamos el primer bit. Ahora es <code>1111 0011</code>, y se trata de un número negativo, pero no lo podemos interpretar como -115. Vamos a seguir la regla del <em>complemento a dos</em>.</p>
+</li>
+<li>
+<p>En primer lugar, invertimos los bits, con lo que tenemos <code>0000 1100</code>. A esto se le llama “complemento a uno“.</p>
+</li>
+<li>
+<p>Le sumamos 1, lo que resulta <code>00001101</code></p>
+</li>
+<li>
+<p>Lo convertimos al sistema decimal, obteniendo un valor 13</p>
+</li>
+<li>
+<p>Le añadimos el signo: -13</p>
+</li>
+</ul>
+<p>Por lo tanto, <code>0111 0011</code> en un dato de ocho bits cuyo valor equivale a 115, y si ponemos a 1 el bit de signo, <code>1111 0011</code> equivale a -13.</p>
+<p>¿Por que a esta técnica se le llama complemento a dos? Porque se realiza un complemento a 1 y se le suma 1.</p>
+<h2 id="numeros-sin-signo">Números sin signo<a class="headerlink" href="#numeros-sin-signo" title="Permanent link">&para;</a></h2>
+<p>Supongamos un dato que ocupa ocho bits y su valor en binario es <code>1111 1111</code>. Cuando escribamos un programa tenemos que decidir como interpretarlo.</p>
+<p>Podríamos pensar que se trata de un valor numérico con signo. Aplicando la regla del complemento a dos, el valor representado es -1.</p>
+<p>Pero también podríamos considerar que se trata de un dato sin signo, es decir, que el primer bit forma parte de la cantidad representada. Convirtiendo de binario a 
+decimal, el valor será 255.</p>
+<p>La interpretación del dato es responsabilidad del programador. El ordenador se limita
+a almacenar una secuencia de dígitos binarios. Nosotros podemos interpretar <code>1111 1111</code> como -1 o como
+255. Cuando en nuestro programa establezcamos que el primer bit representa el signo,
+diremos que tenemos un dato &ldquo;con signo&rdquo;, <em>signed</em>, y si decidimos lo contrario,
+tendremos un valor <em>unsigned</em>. Eso forma parte de las instrucciones del programa.</p>
+<p>Ya hemos visto el posible rango de valores que pueden tomar los números sin signo:</p>
+<ul>
+<li>con 8 bits,  los valores pueden ir de 0 a 255</li>
+<li>con 16 bits, los valores pueden ir de 0 a 65.535</li>
+<li>con 32 bits, los valores pueden ir de 0 a 4.294.967.295</li>
+<li>con 64 bits, los valores pueden ir de 0 a 18.446.744.073.709.551.615 </li>
+</ul>
+<p>Véase que el valor mínimo de un número sin signo siempre es cero. Pero si el dato es con signo, el rango de posibles valores puede ser:</p>
+<ul>
+<li>con 8 bits:  de -128 a 127</li>
+<li>con 16 bits: de -32.768 a 32.767</li>
+<li>con 32 bits: de -2.147.483.648 a 2.147.483.647</li>
+<li>con 64 bits: de −9.223.372.036.854.775.807, a 9.223.372.036.854.775.807</li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="007Datos.html" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Representar datos" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              Representar datos
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="009Decimales.html" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Números con decimales" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              Números con decimales
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.expand", "navigation.tabs", "navigation.tabs.sticky"], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.467223ff.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,24 @@
+body {font-family: Georgia, serif;}
+
+.md-typeset p { text-align: justify;}
+
+.md-typeset h1 { font-size: 3em;
+                 color: brown; }
+
+.md-typeset h2 { border-bottom: 1px solid teal;
+                 color: brown;}
+
+.md-typeset h3 { color: brown;
+                 font-style: italic; }
+
+.md-typeset a  { color: rgb(39, 39, 231) }
+
+.md-typeset blockquote  { border-left: 0px;  font-style: italic;  padding-left: 50px; }
+
+.md-typeset__table thead{color: white;
+                     background-color: #4c6d7c;}
+    
+.sombra {box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+    
+.md-typeset .hll { background-color: #DDDDDD;}
+

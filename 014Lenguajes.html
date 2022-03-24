@@ -1,0 +1,843 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Unos apuntes sobre bits, sistema binario, compiladores y otras cosas">
+      
+      
+      
+        <link rel="canonical" href="https://trezebits.github.io/unmundobinario/014Lenguajes.html">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.5">
+    
+    
+      
+        <title>Lenguajes - Un mundo binario</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.2d9f7617.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="css/estilos.css">
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lenguajes-de-programacion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="." title="Un mundo binario" class="md-header__button md-logo" aria-label="Un mundo binario" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Un mundo binario
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lenguajes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/trezebits/unmundobinario/" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    trezebits/unmundobinario
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link md-tabs__link--active">
+        Indice
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="https://trezebits.github.io" class="md-tabs__link">
+      treZe bits
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Un mundo binario" class="md-nav__button md-logo" aria-label="Un mundo binario" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Un mundo binario
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/trezebits/unmundobinario/" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    trezebits/unmundobinario
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Indice
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Indice" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Indice
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Introducción
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="001Digitos.html" class="md-nav__link">
+        Dígitos binarios
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="002Binario.html" class="md-nav__link">
+        Sistema binario
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="003Aritmetica.html" class="md-nav__link">
+        Aritmética binaria
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="004Bits.html" class="md-nav__link">
+        Bits y Bytes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="005Octal.html" class="md-nav__link">
+        Sistema octal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="006Hexadecimal.html" class="md-nav__link">
+        Sistema hexadecimal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="007Datos.html" class="md-nav__link">
+        Representar datos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="008Numeros.html" class="md-nav__link">
+        Números
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="009Decimales.html" class="md-nav__link">
+        Números con decimales
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="010Textos.html" class="md-nav__link">
+        Textos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="011Imagenes.html" class="md-nav__link">
+        Imágenes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="012Archivos.html" class="md-nav__link">
+        Archivos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="013Programas.html" class="md-nav__link">
+        Programas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Lenguajes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="014Lenguajes.html" class="md-nav__link md-nav__link--active">
+        Lenguajes
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lenguajes-de-programacion" class="md-nav__link">
+    Lenguajes de programación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lenguajes-de-alto-nivel" class="md-nav__link">
+    Lenguajes de alto nivel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portabilidad" class="md-nav__link">
+    Portabilidad
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lenguajes-mas-populares" class="md-nav__link">
+    Lenguajes más populares
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    Código
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpretes" class="md-nav__link">
+    Intérpretes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bytecode" class="md-nav__link">
+    Bytecode
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://trezebits.github.io" class="md-nav__link">
+        treZe bits
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lenguajes-de-programacion" class="md-nav__link">
+    Lenguajes de programación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lenguajes-de-alto-nivel" class="md-nav__link">
+    Lenguajes de alto nivel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portabilidad" class="md-nav__link">
+    Portabilidad
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lenguajes-mas-populares" class="md-nav__link">
+    Lenguajes más populares
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    Código
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpretes" class="md-nav__link">
+    Intérpretes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bytecode" class="md-nav__link">
+    Bytecode
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+  <h1>Lenguajes</h1>
+
+<h2 id="lenguajes-de-programacion">Lenguajes de programación<a class="headerlink" href="#lenguajes-de-programacion" title="Permanent link">&para;</a></h2>
+<p>Aunque seamos expertos en lenguaje máquina, trabajar esta forma es inviable. Además de resultar tremendamente farragoso en el caso de programas con cientos de instrucciones, la probabilidad de cometer errores es muy alta, dado que es fácil equivocarse con los códigos.</p>
+<p>Para facilitar la labor, en la prehistoria de la informática se inventaron mecanismos mediante los cuales, a partir de un <em>texto</em> escrito de acuerdo a una sintaxis &ldquo;más humana&rdquo;, se procedía a hacer una traducción para obtener el archivo ejecutable.</p>
+<p>De esta forma, cuando estemos haciendo cualquier desarrollo, tendremos al menos dos archivos, uno de texto llamado <em>fichero fuente</em> (source file) , y el <em>ejecutable</em> en lenguaje máquina. Al proceso de conversión se le llama <em>compilar</em> el programa.</p>
+<p>La sintaxis utilizada se denomina <em>lenguaje de programación</em>. Consiste en texto, pero no se trata de escritura libre. Cada lenguaje impone unas reglas de sintaxis y el uso de determinadas <em>palabras clave</em> (keywords).</p>
+<p>El primer lenguaje de la historia fue el <em>assembler</em>, donde se sustituye cada código por una abreviatura que nos recuerde lo que hace. El ejemplo anterior podría ser algo así como:</p>
+<div class="highlight"><pre><span></span><code>          global    _start
+
+          section   .text
+_start:   mov       rax, 1                  ; número de llamada para escribir en dispositivo
+          mov       rdi, 1                  ; 1 es la consola
+          mov       rsi, mensaje            ; dirección del texto a mostrar
+          mov       rdx, 12                 ; número de bytes
+          syscall                           ; llama al sistema
+          mov       rax, 60                 ; número de llamada para salir de programa
+          xor       rdi, rdi                ; código 0 de salida
+          syscall                           ; llama al sistema
+
+          section   .data
+mensaje:  db        &quot;Hola, Mundo&quot;, 10       ; texto con salto de línea
+</code></pre></div>
+<p>Cada línea de texto es una instrucción, y a la derecha, tras el punto y coma, podemos poner texto libre, que será ignorado al compilar. A esto se le llama &ldquo;comentarios&rdquo;, y sirve para facilitar las cosas a quien necesite examinar el programa.</p>
+<h2 id="lenguajes-de-alto-nivel">Lenguajes de alto nivel<a class="headerlink" href="#lenguajes-de-alto-nivel" title="Permanent link">&para;</a></h2>
+<p>Escribir los programas así es más factible que hacerlo en lenguaje máquina, pero sigue siendo poco productivo. A veces, para cada tarea se necesitan varias instrucciones. En el ejemplo anterior hay dos operaciones a realizar:</p>
+<ul>
+<li>
+<p>mostrar texto:</p>
+<div class="codehilite"><pre><span></span><code>mov       rax, 1                
+mov       rdi, 1                
+mov       rsi, mensaje          
+mov       rdx, 12               
+syscall
+</code></pre></div>
+
+</li>
+<li>
+<p>finalizar programa:</p>
+<div class="codehilite"><pre><span></span><code>mov       rax, 60   
+xor       rdi, rdi  
+syscall
+</code></pre></div>
+
+</li>
+</ul>
+<p>Para mejorar la productividad, se inventaron los lenguajes &ldquo;de alto nivel&rdquo;, así llamados porque evitamos sumergirnos en las interioridades de la máquina. La idea es que nos limitemos a expresar lo que queremos hacer, dejando que los detalles los resuelva el <em>compilador</em> al generar el ejecutable final. En el ejemplo anterior, el texto del archivo fuente podría ser algo así como:</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">display</span> <span class="s2">&quot;</span><span class="s">Hola, Mundo</span><span class="s2">&quot;</span>
+<span class="k">exit</span> <span class="nv">program</span>
+</code></pre></div>
+
+<p>Tras crear este archivo con un editor de textos, lo traducimos a lenguaje máquina con el  compilador. El archivo fuente contiene <em>sentencias</em>, que al compilarse, se convertirán en instrucciones ejecutables.</p>
+<p>Además de facilitar la lectura y escritura del programa, los lenguajes de alto nivel proporcionan una capa de abstracción, haciendo que nos desentendamos de los detalles internos del ordenador y nos centremos en la lógica del algoritmo a desarrollar. Esto reduce tiempo y costes de desarrollo y evita errores de programación.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>En el caso particular del lenguaje <em>assembler</em>, la operación de convertir de texto a lenguaje máquina se denomina <em>ensamblar</em> en lugar de <em>compilar</em>.</p>
+</div>
+<h2 id="portabilidad">Portabilidad<a class="headerlink" href="#portabilidad" title="Permanent link">&para;</a></h2>
+<p>Ya hemos visto que los programas de diferentes sistemas operativos son incompatibles entre ellos, porque el lenguaje máquina difiere. Ahora bien, si utilizamos un lenguaje de programación de alto nivel, podemos lograr un alto grado de <em>portabilidad</em>. </p>
+<p>En la medida que la sintaxis sea común a todas las plataformas, diremos que los programas son &ldquo;portables&rdquo;, y tomando un único archivo fuente, bastará con traducirlo a los correspondientes lenguajes máquina, obteniendo versiones para cada sistema operativo.</p>
+<p>Esta es otra ventaja de los lenguajes de alto nivel sobre el <em>assembler</em>, que no es portable en absoluto. Cada plataforma tiene su propio lenguaje <em>assembler</em>.</p>
+<h2 id="lenguajes-mas-populares">Lenguajes más populares<a class="headerlink" href="#lenguajes-mas-populares" title="Permanent link">&para;</a></h2>
+<p>La irrupción de los lenguajes de alto nivel, allá por la década de 1950, fue un avance importante en el mundo de los desarrollos informáticos. Una primera experiencia fue el <em>IBM Mathematical <strong>For</strong>mula <strong>Tran</strong>slating System</em>, una sintaxis concebida por la compañía IBM para que los matemáticos escribiesen sus fórmulas, y eso se pudiera compilar convirtiéndose en programas de cálculo. Al final se consolidó como lenguaje de programación para científicos, con el nombre abreviado de FORTRAN.</p>
+<p>La entrada de las computadoras en el mundo de los negocios dió lugar al lenguaje COBOL, creado en 1959 por una comisión de representantes de varios fabricantes. </p>
+<p>En 1964, la universidad de <em>Dartmouth</em> inventó el lenguaje <em>BASIC</em>, pensado para que los estudiantes se familiarizaran con el mundo de la programación. Microsoft lo convirtió posteriormente en una especie de &ldquo;seña de identidad&rdquo;, con su <em>Visual BASIC</em>, muy popular a finales de los noventa.</p>
+<p><em>Pascal</em> fue concebido hacia 1970 por un profesor universitario suizo. Apple y Borland lo popularizaron, pero la competencia con Microsoft lo dejó bastante relegado tras el cambio de siglo.</p>
+<p>Como alternativa a todos estos lenguajes pensados para usuarios, Bell Laboratories, que por aquella época era subsidiaria de la multinacional AT&amp;T, creó en 1972 el lenguaje C, ideado para profesionales de la informática y bastante más técnico. En la década de los ochenta presentaron una versión más evolucionada, C++, que es muy utilizada en la creación de sistemas operativos y algoritmos profesionales, aunque muchos usuarios lo consideren bastante complejo y buscan otras alternativas.</p>
+<p>A finales de siglo se puso de moda Java, un lenguaje concebido por <em>Sun Microsystems</em> (posteriormente absorbida por Oracle), con el propósito de independizar los programas de la plataforma, haciendo que sean portables. Microsoft ideó su propia propuesta en la misma dirección, y creó el lenguaje C#.</p>
+<p>El surgimiento de las páginas web en 1993 también generó nuevas necesidades. <em>JavaScript</em> es el lenguaje por excelencia en el diseño de páginas. </p>
+<p><em>Python</em>, por su parte, surgió en 1995 con el propósito de crear una herramienta fácil de usar, productiva, y orientada a los profesionales.</p>
+<p>En 2009 Google presentó una alternativa al lenguaje C, denominada <em>Go</em>.</p>
+<p>¿Cuantos lenguajes de programación existen actualmente? Miles. Las iniciativas para lograr la mejor herramienta se han multiplicado exponencialmente desde el ámbito universitario, las empresas con intereses comerciales, como Microsoft, IBM o Apple, e incluso desde proyectos personales. Algunos lenguajes están orientados al desarrollo de tareas específicas, mientras que otros están considerados de propósito general.</p>
+<p>Podemos ver una lista de los lenguajes más relevantes en la <a href="https://en.wikipedia.org/wiki/List_of_programming_languages">wikipedia</a>.</p>
+<p>¿Cuales son los más utilizados? Evidentemente no hay una contabilidad mundial que nos indique cuantas personas utilizan cada lenguaje. Pero haciendo búsquedas en Internet, podemos hacer un análisis de popularidad basándonos en el &ldquo;ruido&rdquo; generado:</p>
+<ul>
+<li>¿Que lenguajes tienen su entrada en la wikipedia?</li>
+<li>¿Cuantos libros encontramos sobre cada lenguaje?</li>
+<li>¿Cuales son aquellos sobre los que más se debate en la red? Véase por ejemplo <a href="https://stackoverflow.com/tags">StackOverflow</a>, el popular foro de consulta de dudas sobre programación.</li>
+<li>Podemos hacer búsquedas en Google, vídeos en Youtube, y un largo etcétera.</li>
+</ul>
+<p>¿Hay algún estudio al respecto? Varios. Uno de los más populares es el de la empresa consultora <a href="https://www.tiobe.com/tiobe-index/">TIOBE</a>, de publicación mensual. Otro informe similar que se publica periódicamente es el de <a href="https://redmonk.com/sogrady/category/programming-languages/">RedMonk</a>. También podemos consultar <a href="https://pypl.github.io/PYPL.html">PyPL</a>, <em>PopularitY of Programming Language Index</em>.</p>
+<h2 id="codigo">Código<a class="headerlink" href="#codigo" title="Permanent link">&para;</a></h2>
+<p>El contenido de un programa en lenguaje máquina está formado por códigos. Esto se denomina de forma genérica &ldquo;<em>program code</em>&rdquo;. Cuando hablamos del &ldquo;código&rdquo;, nos estamos refiriendo a las instrucciones del programa.</p>
+<p>El texto fuente se conoce también como &ldquo;código fuente&rdquo;. El resultado de la compilación, en lenguaje máquina, &ldquo;código objeto&rdquo;.</p>
+<p>Existe una polémica que ha hecho correr ríos de tinta. Un fabricante de software, cuando distribuye sus programas en forma de archivos ejecutables, ¿debe facilitar también su <em>código fuente</em>? A esto se le llama <em>política de código abierto</em> y es algo que algunos programadores no ven con buenos ojos, dado que descubre sus secretos y facilita que otras personas modifiquen y recompilen el programa. Sin embargo, los defensores del &ldquo;open source&rdquo; ponen sobre la mesa el concepto de libertad para examinar y modificar los programas que hayamos adquirido. </p>
+<h2 id="interpretes">Intérpretes<a class="headerlink" href="#interpretes" title="Permanent link">&para;</a></h2>
+<p>El uso de un lenguaje de programación implica utilizar dos herramientas de trabajo, un editor de textos para crear el archivo fuente, y un compilador, que lo traduce a lenguaje máquina y genera un archivo ejecutable adaptado a determinado sistema operativo. Sin embargo existe otra alternativa, que consiste en sustituir el compilador por un intérprete.</p>
+<p>Un intérprete es un programa capaz de tomar el texto de un archivo fuente, hacer una compilación &ldquo;al vuelo&rdquo; y ejecutarlo directamente, sin dejar rastro en forma de archivo ejecutable.</p>
+<p>El uso de intérpretes tiene sus ventajas:</p>
+<ul>
+<li>es más fácil de usar que un compilador. Simplemente, escribimos un programa y lo ejecutamos, sin pasar por la fase de compilación</li>
+<li>lo que se ejecuta es el texto fuente, por lo que el usuario puede ver las instrucciones del programa. Con esto estaríamos respetando la política <em>open source</em>.</li>
+</ul>
+<p>Pero también tiene inconvenientes:</p>
+<ul>
+<li>expone las instrucciones del programa al examen de terceros</li>
+<li>permite que el programa sea modificado por los usuarios, lo que invalida la posible garantía que el programador pueda ofrecer sobre su trabajo</li>
+<li>los programas se ejecutan más lentamente, dado que hay una doble tarea de traducción/ejecución, aunque la potencia de los procesadores actuales hace que esto sea bastante tolerable.</li>
+</ul>
+<h2 id="bytecode">Bytecode<a class="headerlink" href="#bytecode" title="Permanent link">&para;</a></h2>
+<p>Una alternativa intermedia entre el compilador y el intérprete es el uso de <em>bytecode</em>. Consiste en una especie de lenguaje máquina universal, independiente del sistema operativo. Necesitaremos tres herramientas:</p>
+<ul>
+<li>con un  editor de textos creamos el/los archivos fuente</li>
+<li>con un compilador los traducimos a lenguaje máquina <em>bytecode</em>, obteniendo archivos ejecutables</li>
+<li>para ejecutar el programa necesitamos un intérprete especial, que traduzca al vuelo de bytecode a lenguaje máquina nativo de cada sistema operativo.</li>
+</ul>
+<p>¿Que ventajas tiene este planteamiento? La traducción de bytecode a lenguaje máquina es menos pesada, lo que acelera la ejecución de programas. Además, ganamos en portabilidad, ya que el formato bytecode es independiente de la plataforma. Y finalmente, no exponemos el programa a posibles modificaciones hechas por el usuario. Y si queremos adoptar la política <em>open source</em>, siempre podemos distribuir los archivos fuente de forma complementaria.</p>
+<p>Existen varios lenguajes de programación que utilizan bytecode, como es el caso de Java, C# o Python. Pero nótese que no son compatibles entre ellos. Cada lenguaje tiene su propio bytecode.</p>
+<p>Otros lenguajes como C o C++ son compilados a lenguaje máquina nativo. El resultado es más eficiente en términos de ejecución, pero nos obliga a recompilar los programas y crear versiones para cada sistema operativo.</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="013Programas.html" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Programas" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              Programas
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.expand", "navigation.tabs", "navigation.tabs.sticky"], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.467223ff.min.js"></script>
+      
+    
+  </body>
+</html>

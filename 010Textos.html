@@ -1,0 +1,998 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Unos apuntes sobre bits, sistema binario, compiladores y otras cosas">
+      
+      
+      
+        <link rel="canonical" href="https://trezebits.github.io/unmundobinario/010Textos.html">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.5">
+    
+    
+      
+        <title>Textos - Un mundo binario</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.2d9f7617.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="css/estilos.css">
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#textos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="." title="Un mundo binario" class="md-header__button md-logo" aria-label="Un mundo binario" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Un mundo binario
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Textos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/trezebits/unmundobinario/" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    trezebits/unmundobinario
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link md-tabs__link--active">
+        Indice
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="https://trezebits.github.io" class="md-tabs__link">
+      treZe bits
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Un mundo binario" class="md-nav__button md-logo" aria-label="Un mundo binario" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Un mundo binario
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/trezebits/unmundobinario/" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    trezebits/unmundobinario
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Indice
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Indice" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Indice
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Introducción
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="001Digitos.html" class="md-nav__link">
+        Dígitos binarios
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="002Binario.html" class="md-nav__link">
+        Sistema binario
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="003Aritmetica.html" class="md-nav__link">
+        Aritmética binaria
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="004Bits.html" class="md-nav__link">
+        Bits y Bytes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="005Octal.html" class="md-nav__link">
+        Sistema octal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="006Hexadecimal.html" class="md-nav__link">
+        Sistema hexadecimal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="007Datos.html" class="md-nav__link">
+        Representar datos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="008Numeros.html" class="md-nav__link">
+        Números
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="009Decimales.html" class="md-nav__link">
+        Números con decimales
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Textos
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="010Textos.html" class="md-nav__link md-nav__link--active">
+        Textos
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#codificaciones" class="md-nav__link">
+    Codificaciones
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="011Imagenes.html" class="md-nav__link">
+        Imágenes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="012Archivos.html" class="md-nav__link">
+        Archivos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="013Programas.html" class="md-nav__link">
+        Programas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="014Lenguajes.html" class="md-nav__link">
+        Lenguajes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://trezebits.github.io" class="md-nav__link">
+        treZe bits
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#codificaciones" class="md-nav__link">
+    Codificaciones
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="textos">Textos<a class="headerlink" href="#textos" title="Permanent link">&para;</a></h1>
+<p>Un texto es una secuencia de caracteres, donde cada letra del alfabeto tiene asignado un código numérico. Ya hemos visto como ejemplo la palabra &ldquo;Hola&rdquo;, que es una secuencia de cuatro caracteres:</p>
+<table>
+<thead>
+<tr>
+<th>Byte</th>
+<th align="center">Carácter</th>
+<th align="center">Código</th>
+<th>En binario</th>
+<th align="center">En hexadecimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1º byte</td>
+<td align="center">H</td>
+<td align="center">72</td>
+<td>0100 1000</td>
+<td align="center">48</td>
+</tr>
+<tr>
+<td>2º byte</td>
+<td align="center">o</td>
+<td align="center">111</td>
+<td>0110 1111</td>
+<td align="center">6F</td>
+</tr>
+<tr>
+<td>3º byte</td>
+<td align="center">l</td>
+<td align="center">108</td>
+<td>0110 1100</td>
+<td align="center">6C</td>
+</tr>
+<tr>
+<td>4º byte</td>
+<td align="center">a</td>
+<td align="center">97</td>
+<td>0110 0001</td>
+<td align="center">61</td>
+</tr>
+</tbody>
+</table>
+<p>Por lo tanto, esta palabra se almacenará en la memoria RAM haciendo uso de cuatro bytes, y mediante la siguiente secuencia de bits:</p>
+<div class="codehilite"><pre><span></span><code><span class="mf">0100</span><span class="w"> </span><span class="mf">1000</span><span class="w"> </span><span class="mf">0110</span><span class="w"> </span><span class="mf">1111</span><span class="w"> </span><span class="mf">0110</span><span class="w"> </span><span class="mf">1100</span><span class="w"> </span><span class="mf">0110</span><span class="w"> </span><span class="mf">0001</span><span class="w"></span>
+</code></pre></div>
+
+<p>o lo que es lo mismo, en hexadecimal:</p>
+<div class="codehilite"><pre><span></span><code><span class="mf">48</span><span class="w"> </span><span class="mf">6</span><span class="n">F</span><span class="w"> </span><span class="mf">6</span><span class="n">C</span><span class="w"> </span><span class="mf">61</span><span class="w"></span>
+</code></pre></div>
+
+<p>Dentro de un texto podemos incluir dígitos numéricos, que serán considerados como caracteres regulares:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Carácter</th>
+<th align="center">Código</th>
+<th>En binario</th>
+<th align="center">En hexadecimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">48</td>
+<td>0011 0000</td>
+<td align="center">30</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">49</td>
+<td>0011 0001</td>
+<td align="center">31</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">50</td>
+<td>0011 0010</td>
+<td align="center">32</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">51</td>
+<td>0011 0011</td>
+<td align="center">33</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">52</td>
+<td>0011 0100</td>
+<td align="center">34</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">53</td>
+<td>0011 0101</td>
+<td align="center">35</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">54</td>
+<td>0011 0110</td>
+<td align="center">36</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">55</td>
+<td>0011 0111</td>
+<td align="center">37</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">56</td>
+<td>0011 1000</td>
+<td align="center">38</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">57</td>
+<td>0011 1001</td>
+<td align="center">39</td>
+</tr>
+</tbody>
+</table>
+<p>Las mayúsculas y minúsculas son caracteres diferentes:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Carácter</th>
+<th align="center">Código</th>
+<th>En binario</th>
+<th align="center">En hexadecimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">A</td>
+<td align="center">65</td>
+<td>0100 0001</td>
+<td align="center">41</td>
+</tr>
+<tr>
+<td align="center">a</td>
+<td align="center">97</td>
+<td>0110 0001</td>
+<td align="center">61</td>
+</tr>
+</tbody>
+</table>
+<p>El espacio en blanco es un carácter más, representado con un código 32 en decimal, 20 en hexadecimal y <code>0010 0000</code> en binario.</p>
+<p>Los símbolos de puntuación son caracteres:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Carácter</th>
+<th align="center">Código</th>
+<th>En binario</th>
+<th align="center">En hexadecimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>!</code></td>
+<td align="center">33</td>
+<td>0010 0001</td>
+<td align="center">21</td>
+</tr>
+<tr>
+<td align="center"><code>"</code></td>
+<td align="center">34</td>
+<td>0010 0010</td>
+<td align="center">22</td>
+</tr>
+<tr>
+<td align="center"><code>#</code></td>
+<td align="center">35</td>
+<td>0010 0011</td>
+<td align="center">23</td>
+</tr>
+<tr>
+<td align="center"><code>$</code></td>
+<td align="center">36</td>
+<td>0010 0100</td>
+<td align="center">24</td>
+</tr>
+<tr>
+<td align="center"><code>%</code></td>
+<td align="center">37</td>
+<td>0010 0101</td>
+<td align="center">25</td>
+</tr>
+<tr>
+<td align="center"><code>&amp;</code></td>
+<td align="center">38</td>
+<td>0010 0110</td>
+<td align="center">26</td>
+</tr>
+<tr>
+<td align="center"><code>'</code></td>
+<td align="center">39</td>
+<td>0010 0111</td>
+<td align="center">27</td>
+</tr>
+<tr>
+<td align="center"><code>(</code></td>
+<td align="center">40</td>
+<td>0010 1000</td>
+<td align="center">28</td>
+</tr>
+<tr>
+<td align="center"><code>)</code></td>
+<td align="center">41</td>
+<td>0010 1001</td>
+<td align="center">29</td>
+</tr>
+<tr>
+<td align="center"><code>*</code></td>
+<td align="center">42</td>
+<td>0010 1010</td>
+<td align="center">2A</td>
+</tr>
+<tr>
+<td align="center"><code>+</code></td>
+<td align="center">43</td>
+<td>0010 1011</td>
+<td align="center">2B</td>
+</tr>
+<tr>
+<td align="center"><code>,</code></td>
+<td align="center">44</td>
+<td>0010 1100</td>
+<td align="center">2C</td>
+</tr>
+<tr>
+<td align="center"><code>-</code></td>
+<td align="center">45</td>
+<td>0010 1101</td>
+<td align="center">2D</td>
+</tr>
+<tr>
+<td align="center"><code>.</code></td>
+<td align="center">46</td>
+<td>0010 1110</td>
+<td align="center">2E</td>
+</tr>
+<tr>
+<td align="center"><code>/</code></td>
+<td align="center">47</td>
+<td>0010 1111</td>
+<td align="center">2F</td>
+</tr>
+</tbody>
+</table>
+<p>Existe un caso especial de caracteres denominados &ldquo;<em>de control</em>&rdquo;. Cuando enviamos texto a una impresora, por ejemplo, lo que transmitimos es una secuencia de códigos. Un código 10 representa un salto de línea, un 9 es un tabulador, un 12 sirve para saltar a la página siguiente, y así sucesivamente.</p>
+<h2 id="codificaciones">Codificaciones<a class="headerlink" href="#codificaciones" title="Permanent link">&para;</a></h2>
+<p>¿Quien determina el código asignado a cada letra del alfabeto? En los inicios de la informática, cada fabricante de ordenadores tenía su propia codificación, pero cuando surgió la necesidad de transmitir datos de una máquina a otra, hubo que llegar a un acuerdo y establecer codificaciones estándar.</p>
+<p>Históricamente la codificación más popular ha sido ASCII, abreviatura de <em>Código Estándar Americano para Intercambio de Información</em>. Véase una lista de los códigos asignados a cada carácter en la <a href="https://es.wikipedia.org/wiki/ASCII">Wikipedia</a>. Los ejemplos vistos en el apartado anterior siguen ese estándar.</p>
+<p>ASCII presenta un problema importante: solo recoge los caracteres del alfabeto inglés, así como los dígitos numéricos y los símbolos de puntuación, como es el caso de las comillas, paréntesis, punto y coma, etcétera. Pero no se incluyen caracteres como la <strong>ñ</strong> española, las francesas <strong>æ</strong> y <strong>œ</strong>, o la alemana <strong>ß</strong>, por ejemplo. Tampoco admite vocales acentuadas.</p>
+<p>Para solucionarlo surgieron distintas versiones de ASCII ampliadas. Una de las más populares fue la <a href="https://es.wikipedia.org/wiki/ISO/IEC_8859-1">ISO 8859-1</a>, que añade caracteres de la Europa occidental. Esta codificación también es conocida como <em>Latin-1</em>.</p>
+<p>Tanto ASCII como Latin-1 utilizan un byte para cada carácter, quedando limitado a un juego máximo de 256 caracteres, es decir, el número de combinaciones que tenemos con 8 bits. Sin embargo esto es claramente insuficiente para representar idiomas fuera del ámbito europeo. </p>
+<p>Fruto de esta inquietud, en la década de 1980 surgió un grupo de trabajo impulsado por Xerox y Apple, para elaborar una propuesta de caracteres de 16 bits, lo que proporciona una capacidad de 65.536 combinaciones diferentes. Finalmente se creó el <a href="https://es.wikipedia.org/wiki/Unicode">consorcio UNICODE</a>, integrado actualmente por importantes empresas como Adobe, Apple, Facebook, Google, IBM o Microsoft, por ejemplo. A lo largo de los años se han ido desarrollando tres  codificaciones principales que llegan a utilizar hasta 32 bits por carácter, representando más de cien mil caracteres. Incluye todos los idiomas del mundo, símbolos matemáticos, técnicos, musicales, iconos, emojis, y un largo etcétera. Periódicamente se van incluyendo nuevas versiones con caracteres añadidos.</p>
+<p>Las tres codificaciones de Unicode son:</p>
+<ul>
+<li>
+<p>UTF-8. Cada carácter puede ocupar uno, dos, tres o cuatro bytes, según el caso. Los caracteres del alfabeto anglosajón ocupan un byte y coinciden con la codificación ASCII.</p>
+</li>
+<li>
+<p>UTF-16. Cada carácter se representa con 16 bits. El conjunto de caracteres que se pueden representar así se denomina &ldquo;plano básico multilingüe&rdquo;. Los caracteres extra que no forman parte de este conjunto, requieren 32 bits cada uno.</p>
+</li>
+<li>
+<p>UTF-32. Es la codificación más simple, ya que todos los caracteres ocupan 32 bits.</p>
+</li>
+</ul>
+<p>Veamos algunos ejemplos. </p>
+<p>La letra <code>A</code> mayúscula se representa de la siguiente forma:</p>
+<ul>
+<li>ASCII: <code>01000001</code>, en hexadecimal, <code>41</code> (un byte)</li>
+<li>Latin-1: <code>01000001</code>, en hexadecimal, <code>41</code> (un byte). Coincide con ASCII.</li>
+<li>UTF-8: <code>01000001</code>, en hexadecimal, <code>41</code> (un byte). Coincide con ASCII.</li>
+<li>UTF-16: <code>00000000 01000001</code>, en hexadecimal, <code>00 41</code> (dos bytes). </li>
+<li>UTF-32: <code>00000000 00000000 00000000 01000001</code>, en hexadecimal, <code>00 00 00 41</code> (cuatro bytes). </li>
+</ul>
+<p>UTF 16 y UTF 32 tienen dos variantes cada una. En los ejemplos hemos usado UTF-16BE y UTF32BE respectivamente, pero tenemos las variantes UTF-16LE y UTF32LE, que consisten en poner los bytes al revés:</p>
+<ul>
+<li>UTF-16BE: <code>00 41</code> (16 bits)</li>
+<li>UTF-32BE: <code>00 00 00 41</code> (32 bits)</li>
+<li>UTF-16LE: <code>41 00</code> (16 bits)</li>
+<li>UTF-32LE: <code>41 00 00 00</code> (32 bits)</li>
+</ul>
+<p>Los caracteres que no forman parte del juego ASCII, requieren más bytes en el caso de estándares Unicode. Por ejemplo:</p>
+<ul>
+<li>Letra Ñ en UTF-8: <code>C3 91</code>, en binario, <code>11000011 10010001</code> (16 bits)</li>
+<li>Letra Ñ en UTF-16: <code>00 D1</code>, en binario, <code>00000000 11010001</code> (16 bits)</li>
+<li>Letra Ñ en UTF-32: <code>00 00 00 D1</code> (32 bits)</li>
+<li>Letra Ñ en latin-1: <code>D1</code> (8 bits)</li>
+</ul>
+<p>Símbolos matemáticos: infinito <strong>∞</strong></p>
+<ul>
+<li>UTF-8: <code>E2 88 9E</code> en hexadecimal (tres bytes)</li>
+<li>UTF-16: <code>22 1E</code> (dos bytes)</li>
+<li>UTF-32: <code>00 00 22 1E</code> (cuatro bytes)</li>
+</ul>
+<p>Emojis: 😀</p>
+<ul>
+<li>UTF-8: <code>F0 9F 98 80</code> (cuatro bytes)</li>
+<li>UTF-16: <code>D8 3D DE 00</code> (cuatro bytes)</li>
+<li>UTF-32: <code>00 01 F6 00</code> (cuatro bytes)</li>
+</ul>
+<p>Véase que la codificación más simple y con más capacidad es la UTF-32. Sin embargo, también es la que supone mayor gasto de memoria, en términos de número de bits utilizados. UTF-8 es aparentemente la más compleja, por utilizar un número variable de bytes dependiendo del carácter, pero es una codificación muy popular, dado que es la que menos gasto supone y que, en el caso de limitarnos al alfabeto anglosajón, es totalmente compatible con ASCII.</p>
+<p>¿Como podemos averiguar el código correspondiente a cada carácter? En Internet existen multitud de páginas de consulta. Basta con introducir el término de búsqueda &ldquo;<em>tabla de caracteres unicode</em>&rdquo;.</p>
+<p>Siendo UTF-8 la más popular, ¿como funciona? Supongamos un texto formado por una secuencia de bytes cuyo primer byte es <code>C3</code>, en hexadecimal. ¿Es un carácter por si mismo o forma parte de una secuencia de dos, tres o cuatro bytes? Lo que hará el ordenador será analizar los bits: </p>
+<ul>
+<li>Si el primer bit es un cero, el byte representa un carácter</li>
+<li>Si el primer bit es un uno, el byte forma parte de un carácter de varios bytes:<ul>
+<li>Si el segundo bit es un uno, se trata del primer byte del carácter. El número de unos antes de encontrar un cero nos dice cuantos bytes forman el carácter</li>
+<li>Si el segundo bit es un cero, es un byte de continuación.</li>
+</ul>
+</li>
+</ul>
+<p>Veamos un ejemplo. Supongamos que al recorrer un texto encontramos un byte <code>11000011</code>. Como el primer bit es un uno, asumimos que hay más bytes, y como al principio hay dos unos, deducimos que el carácter está formado por dos bytes, y que el segundo viene a continuación.</p>
+<p>En resumen, en UTF-8 tenemos los siguientes patrones:</p>
+<ul>
+<li>Caracteres de 1 byte: <code>0nnnnnnn</code></li>
+<li>Caracteres de dos bytes: <code>110nnnnn 10nnnnnn</code></li>
+<li>Caracteres de tres bytes: <code>1110nnnn 10nnnnnn 10nnnnnn</code></li>
+<li>Caracteres de cuatro bytes: <code>11110nnn 10nnnnnn 10nnnnnn 10nnnnnn</code></li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="009Decimales.html" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Números con decimales" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              Números con decimales
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="011Imagenes.html" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Imágenes" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              Imágenes
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.expand", "navigation.tabs", "navigation.tabs.sticky"], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.467223ff.min.js"></script>
+      
+    
+  </body>
+</html>

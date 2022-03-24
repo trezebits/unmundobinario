@@ -1,0 +1,741 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Unos apuntes sobre bits, sistema binario, compiladores y otras cosas">
+      
+      
+      
+        <link rel="canonical" href="https://trezebits.github.io/unmundobinario/013Programas.html">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.5">
+    
+    
+      
+        <title>Programas - Un mundo binario</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.2d9f7617.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="css/estilos.css">
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#programas" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="." title="Un mundo binario" class="md-header__button md-logo" aria-label="Un mundo binario" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Un mundo binario
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Programas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/trezebits/unmundobinario/" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    trezebits/unmundobinario
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link md-tabs__link--active">
+        Indice
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="https://trezebits.github.io" class="md-tabs__link">
+      treZe bits
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Un mundo binario" class="md-nav__button md-logo" aria-label="Un mundo binario" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Un mundo binario
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/trezebits/unmundobinario/" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    trezebits/unmundobinario
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Indice
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Indice" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Indice
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Introducción
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="001Digitos.html" class="md-nav__link">
+        Dígitos binarios
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="002Binario.html" class="md-nav__link">
+        Sistema binario
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="003Aritmetica.html" class="md-nav__link">
+        Aritmética binaria
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="004Bits.html" class="md-nav__link">
+        Bits y Bytes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="005Octal.html" class="md-nav__link">
+        Sistema octal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="006Hexadecimal.html" class="md-nav__link">
+        Sistema hexadecimal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="007Datos.html" class="md-nav__link">
+        Representar datos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="008Numeros.html" class="md-nav__link">
+        Números
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="009Decimales.html" class="md-nav__link">
+        Números con decimales
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="010Textos.html" class="md-nav__link">
+        Textos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="011Imagenes.html" class="md-nav__link">
+        Imágenes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="012Archivos.html" class="md-nav__link">
+        Archivos
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Programas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="013Programas.html" class="md-nav__link md-nav__link--active">
+        Programas
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#programas" class="md-nav__link">
+    Programas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejecutar-programas" class="md-nav__link">
+    Ejecutar programas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lenguaje-maquina" class="md-nav__link">
+    Lenguaje máquina
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="014Lenguajes.html" class="md-nav__link">
+        Lenguajes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://trezebits.github.io" class="md-nav__link">
+        treZe bits
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#programas" class="md-nav__link">
+    Programas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejecutar-programas" class="md-nav__link">
+    Ejecutar programas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lenguaje-maquina" class="md-nav__link">
+    Lenguaje máquina
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+  <h1>Programas</h1>
+
+<h2 id="programas">Programas<a class="headerlink" href="#programas" title="Permanent link">&para;</a></h2>
+<p>Para muchos usuarios, un programa es algo que se ejecuta al pulsar sobre un icono en el escritorio del ordenador o en la pantalla de un dispositivo móvil. Pero generalmente todo icono está ligado a un archivo. Si se trata de un documento, el fichero se abrirá y se mostrará en la pantalla. Tratándose de un programa, el archivo es localizado en algún directorio, su contenido copiado a la memoria RAM, y las instrucciones del programa ejecutadas.</p>
+<p>Los programas son archivos que contienen instrucciones para que el ordenador sepa lo que tiene que hacer y como hacerlo. Cuando decimos que estamos &ldquo;<em>instalando</em>&rdquo; un programa en nuestro equipo, lo que hacemos en realidad es descargar ese fichero de Internet u obtenerlo por otros medios, y copiarlo al disco duro. Una vez instalado, lo podemos ejecutar, por lo cual recibe el nombre de <em>archivo ejecutable</em>.</p>
+<p>A la creación de programas se le llama <em>desarrollo</em> de software, y nuestra labor como programadores será escribir las instrucciones que forman cada programa. Tendremos que adaptarnos al formato del sistema operativo al
+que nos dirigimos, ya que son incompatibles entre ellos. Un programa concebido para
+Windows, por ejemplo, no funcionará en una tablet <em>Android</em>, y viceversa.</p>
+<p>Uno de los sistemas operativos más populares es <em>Windows</em>, creado por 
+<em>Microsoft</em>, y que muchos fabricantes de ordenadores incorporan en sus productos. 
+Otro sistema bastante conocido es <em>Android</em>, presente en multitud de dispositivos móviles.
+Los ordenadores de la casa <em>Apple</em> tienen sus propio sistema <em>Mac OS</em>.</p>
+<p>A nivel corporativo, el sistema operativo utilizado en muchos servidores es el veterano <em>UNIX</em>. Si buscamos un clon de UNIX para ordenadores domésticos, podemos instalar y
+utilizar alguna de las muchas versiones de <em>Linux</em>.</p>
+<h2 id="ejecutar-programas">Ejecutar programas<a class="headerlink" href="#ejecutar-programas" title="Permanent link">&para;</a></h2>
+<p>Cada sistema operativo tiene su forma de poner en marcha un programa, pero en líneas generales, cuando pulsamos en el escritorio sobre un icono que represente un programa, sucede lo siguiente:</p>
+<ul>
+<li>Se averigua cual es el archivo ejecutable asociado al icono. </li>
+<li>Se busca ese archivo en el disco. Si no se encuentra, generalmente aparecerá en la pantalla un mensaje de error.</li>
+<li>Se reserva espacio libre en la memoria RAM.</li>
+<li>Se copia el contenido del archivo ejecutable en el espacio de memoria RAM que se ha reservado para el programa.</li>
+<li>Se van tomando las instrucciones del programa de una en una. Para ejecutar cada instrucción, se copia previamente a un registro especial de la CPU, sustituyendo a la instrucción anterior.</li>
+<li>En todo programa ha de haber una instrucción &ldquo;<em>finalizar ejecución</em>&rdquo;. Al llegar aquí, el sistema operativo libera el espacio de memoria RAM destinado al programa y lo deja disponible para otros procesos.</li>
+</ul>
+<h2 id="lenguaje-maquina">Lenguaje máquina<a class="headerlink" href="#lenguaje-maquina" title="Permanent link">&para;</a></h2>
+<p>¿Que aspecto tienen las instrucciones de un programa? Veámoslo con un ejemplo. Podríamos examinar algún programa vistoso que muestre varias ventanas con imágenes y otros recursos gráficos, pero resulta más práctico examinar algo sencillo. En los libros de programación se encuentra muy extendida la tradición de empezar mostrando la frase <em>¡Hola, Mundo!</em> en una consola de texto. </p>
+<p>Hasta la década de los años ochenta del pasado siglo, las consolas eran pantallas donde la información se mostraba en forma de texto, sin todos esos elementos gráficos a los que estamos acostumbrados en la actualidad:</p>
+<p><br/></p>
+<p><img alt="" src="img/pcTexto.jpg" style="width:300px;" /></p>
+<p><br/></p>
+<p>En muchos sistemas operativos modernos contamos con algún programa llamado <em>Terminal</em>, donde se emula una consola de texto dentro de una ventana:</p>
+<p><img alt="" src="img/Hola.png" /></p>
+<p>Como ya hemos apuntado, el formato de instrucciones del programa dependerá del sistema operativo. El fabricante de chips también influye, ya que cada CPU funciona a su manera. Para mostrar la frase &ldquo;Hola, Mundo&rdquo; en un ordenador de sobremesa con chips de Intel y sistema operativo Linux, al examinar el contenido del archivo ejecutable, el bloque principal podría ser algo así como:</p>
+<div class="codehilite"><pre><span></span><code>B801000000BF0100000048BE0000000000000000BA0C0000000F05B83C0000004831FF0F05
+</code></pre></div>
+
+<p>Lo que aquí vemos es una representación hexadecimal de los ceros y unos contenidos en el fichero. Un ingeniero de sistemas podría trocear esa secuencia de códigos, identificando cada instrucción por separado:</p>
+<div class="codehilite"><pre><span></span><code>B801000000
+BF01000000
+48BE0000000000000000
+BA0C000000
+0F05
+B83C000000
+4831FF
+0F05
+</code></pre></div>
+
+<p>Este formato es conocido como <em>lenguaje máquina</em>. Cada fabricante de chips impone sus códigos, y cada sistema operativo, la forma de utilizarlos. Si queremos crear un programa que funcione en distintas plataformas, tendremos que reescribir las instrucciones para obtener diferentes versiones.</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="012Archivos.html" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Archivos" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              Archivos
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="014Lenguajes.html" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Lenguajes" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              Lenguajes
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.expand", "navigation.tabs", "navigation.tabs.sticky"], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.467223ff.min.js"></script>
+      
+    
+  </body>
+</html>
